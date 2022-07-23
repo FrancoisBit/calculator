@@ -48,8 +48,10 @@ function operate(operator, number1, number2) {
 }
 
 function countDecimals(value) {
-    console.log('value' + value)
-    if(Math.floor(value) === value) return 0;
+    if(Math.floor(value) === value) {
+        return 0;
+    }
+
     return value.toString().split(".")[1].length || 0; 
 }    
 
@@ -57,14 +59,12 @@ function displayValue(newNumber) {
     const display = document.querySelector(".display");
 
     const count = countDecimals(parseFloat(newNumber));
-    console.log('countDecimals' + count)
 
     if(count > 3) {
         newNumber = parseFloat(newNumber).toFixed(3);
     }
 
     if(operator === "") {
-        console.log(number1)
 
         if(number1 == 0) {
             display.textContent = newNumber;
@@ -79,11 +79,11 @@ function displayValue(newNumber) {
 
     else {
         display.textContent = newNumber;
-        number2 = display.textContent
+        number2 = display.textContent;
     }
 }
 
-function applyClear(event) {
+function applyClear() {
     number1 = 0;
     number2 = 0;
     operator = "";
@@ -92,30 +92,22 @@ function applyClear(event) {
 }
 
 function applyNumber(event) {
-    displayValue(event.target.textContent)
+    displayValue(event.target.textContent);
 }
 
 function applyOperator(event) {
-    console.log("applyyyy")
     if(number1 != 0 && number2 != 0) {
-        console.log("operator " + operator);
-        console.log("number1 " + number1);
-        console.log("number2 " + number2);
 
         const result = operate(operator, number1, number2);
         displayValue(result);
-        console.log("result " + result);
+
         number1 = result;
         number2 = 0;
     }
 
-    console.log("operator " + operator);
-
     if(event.target.textContent != "=") {
         operator = event.target.textContent;
     }
-
-    console.log("operator " + operator);
 }
 
 function buttonMouseEnter(event) {
@@ -123,7 +115,7 @@ function buttonMouseEnter(event) {
 }
 
 function buttonMouseExit(event) {
-    event.target.classList.remove("hover")
+    event.target.classList.remove("hover");
 }
 
 function addButtonClearEventListener() {
@@ -159,7 +151,7 @@ function addButtonMouseEventListener() {
     });
 }
 
-addButtonClearEventListener()
+addButtonClearEventListener();
 addButtonNumberEventListener();
 addButtonOperatorEventListener();
 addButtonMouseEventListener();
